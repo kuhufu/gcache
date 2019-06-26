@@ -11,3 +11,39 @@ var cache = NewMemCache(cacheSize)
 ```go
 var cache = NewRedisCache(10, "tcp", "127.0.0.1:6379", "password")
 ```
+
+### 使用
+
+Set
+```go
+expireSeconds := 10 //10s后过期，expireSeconds <= 0时，永不过期
+cache.Set("key", []byte("value"), expireSeconds)
+```
+
+Get
+```go
+//err != nil, "key"不存在，
+value, err := cache.Get("key")
+```
+
+Del
+```go
+//affected == true, "key"存在，
+//affected == false, "key"不存在，
+affected := cache.Del("key")
+```
+
+GetUnmarshal
+```go
+value, err := cache.GetUnmarshal("key")
+```
+```
+//等价于
+bytes, err := cache.Get("key")
+if err != nil {
+    return nil, err
+}
+var value interface{}
+err = json.Unmarshal(data, &value)
+return value, err
+```
