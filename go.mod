@@ -1,4 +1,4 @@
-module gcache
+module github.com/kuhufu/gcache
 
 go 1.12
 
