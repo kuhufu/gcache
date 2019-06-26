@@ -22,14 +22,14 @@ cache.Set("key", []byte("value"), expireSeconds)
 
 Get
 ```go
-//err != nil, "key"不存在，
+//"key"不存在，err != nil
 value, err := cache.Get("key")
 ```
 
 Del
 ```go
-//affected == true, "key"存在，
-//affected == false, "key"不存在，
+//"key"存在，affected == true
+//"key"不存在，affected == false
 affected := cache.Del("key")
 ```
 
