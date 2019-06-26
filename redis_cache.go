@@ -6,11 +6,11 @@ import (
 	"github.com/kuhufu/flyredis"
 )
 
-type RedisCache struct {
+type redisCache struct {
 	inner *flyredis.Pool
 }
 
-func (c *RedisCache) Set(key string, val []byte, expireSeconds int) error {
+func (c *redisCache) Set(key string, val []byte, expireSeconds int) error {
 	var err error
 	if expireSeconds <= 0 {
 		err = c.inner.SET(key, val).Error()
@@ -20,16 +20,16 @@ func (c *RedisCache) Set(key string, val []byte, expireSeconds int) error {
 	return err
 }
 
-func (c *RedisCache) Get(key string) (value []byte, err error) {
+func (c *redisCache) Get(key string) (value []byte, err error) {
 	return c.inner.GET(key).Bytes()
 }
 
-func (c *RedisCache) Del(key string) (affected bool) {
+func (c *redisCache) Del(key string) (affected bool) {
 	reply, _ := c.inner.DEL(key).Int()
 	return reply != 0
 }
 
-func (c *RedisCache) GetUnmarshal(key string) (value interface{}, err error) {
+func (c *redisCache) GetUnmarshal(key string) (value interface{}, err error) {
 	reply, err := c.inner.GET(key).Bytes()
 	if err != nil {
 		return nil, err

@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type cacheStore interface {
+type CacheStore interface {
 	//expireSeconds <= 0 表示永不过期
 	Set(key string, val []byte, expireSeconds int) error
 
@@ -18,14 +18,14 @@ type cacheStore interface {
 	GetUnmarshal(key string) (value interface{}, err error)
 }
 
-func NewMemCache(size int) cacheStore {
-	return &MemCache{
+func NewMemCache(size int) CacheStore {
+	return &memCache{
 		inner: freecache.NewCache(size),
 	}
 }
 
-func NewRedisCache(size int, network, address, password string) cacheStore {
-	return &RedisCache{
+func NewRedisCache(size int, network, address, password string) CacheStore {
+	return &redisCache{
 		inner: flyredis.NewPool(&redis.Pool{
 			MaxIdle:     size,
 			IdleTimeout: 240 * time.Second,
