@@ -49,23 +49,15 @@ return value, err
 ```
 
 ### Benchmark
-memCache
-```
-os: windows
-goarch: amd64
-pkg: github.com/kuhufu/gcache
-BenchmarkMemCache_Get1KB-8     	 1000000	      1797 ns/op
-BenchmarkMemCache_Get10KB-8    	 1000000	      1788 ns/op
-BenchmarkMemCache_Get100KB-8   	  100000	     17350 ns/op
-PASS
-```
-redisCache
 ```
 goos: windows
 goarch: amd64
 pkg: github.com/kuhufu/gcache
-BenchmarkRedisCache_Get1KB-8     	   10000	    122729 ns/op
-BenchmarkRedisCache_Get10KB-8    	   10000	    133124 ns/op
-BenchmarkRedisCache_Get100KB-8   	   10000	    200685 ns/op
+BenchmarkMemCache_Get1KB-8       	 1000000	      1835 ns/op
+BenchmarkMemCache_Get10KB-8      	 1000000	      1836 ns/op
+BenchmarkMemCache_Get100KB-8     	  100000	     17929 ns/op
+BenchmarkRedisCache_Get1KB-8     	   10000	    119930 ns/op
+BenchmarkRedisCache_Get10KB-8    	   10000	    138720 ns/op
+BenchmarkRedisCache_Get100KB-8   	   10000	    208979 ns/op
 PASS
 ```
