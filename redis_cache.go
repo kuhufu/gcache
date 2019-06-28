@@ -6,9 +6,12 @@ import (
 	"github.com/kuhufu/flyredis"
 )
 
+// redis缓存
 type redisCache struct {
 	inner *flyredis.Pool
 }
+
+var _ CacheStore = (*redisCache)(nil)
 
 func (c *redisCache) Set(key string, val []byte, expireSeconds int) error {
 	var err error

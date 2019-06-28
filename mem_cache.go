@@ -5,9 +5,12 @@ import (
 	"github.com/coocood/freecache"
 )
 
+// 应用内存缓存
 type memCache struct {
 	inner *freecache.Cache
 }
+
+var _ CacheStore = (*memCache)(nil)
 
 func (c *memCache) Set(key string, val []byte, expireSeconds int) error {
 	return c.inner.Set([]byte(key), val, expireSeconds)
