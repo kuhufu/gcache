@@ -33,7 +33,7 @@ func BenchmarkRedisCache_Get1KB(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_, err := cacheStore.Get(redisKey)
 		if err != nil {
-			b.Fatal("error")
+			b.Fatal(err)
 		}
 	}
 }
@@ -44,7 +44,7 @@ func BenchmarkRedisCache_Get10KB(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_, err := cacheStore.Get(redisKey)
 		if err != nil {
-			b.Fatal("error")
+			b.Fatal(err)
 		}
 	}
 }
@@ -56,7 +56,7 @@ func BenchmarkRedisCache_Get100KB(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_, err := cacheStore.Get(redisKey)
 		if err != nil {
-			b.Fatal("error")
+			b.Fatal(err)
 		}
 	}
 }
