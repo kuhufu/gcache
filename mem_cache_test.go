@@ -30,7 +30,7 @@ func TestMemCache_Del(t *testing.T) {
 }
 
 func BenchmarkMemCache_Get1KB(b *testing.B) {
-	data := make([]byte, 10240)
+	data := make([]byte, 1024)
 	cache.Set(memKey, data, -1)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
