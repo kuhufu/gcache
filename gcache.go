@@ -4,6 +4,7 @@ import (
 	"github.com/coocood/freecache"
 	"github.com/gomodule/redigo/redis"
 	"github.com/kuhufu/flyredis"
+	"github.com/kuhufu/scheduler"
 	"time"
 )
 
@@ -39,4 +40,24 @@ func NewRedisCache(size int, network, address, password string) CacheStore {
 		}),
 	}
 
+}
+
+var s = scheduler.New()
+
+func StartSchedule() {
+	s.Start()
+}
+
+func StopSchedule() {
+	s.Stop()
+}
+
+//@param immediately 是否立刻执行一次fetch函数
+func Interval(store CacheStore, key string, seconds int, fetch func() []byte, immediately bool) {
+	if immediately {
+		store.Set(key, fetch(), -1)
+	}
+	s.AddIntervalFunc(time.Duration(seconds)*time.Second, func() {
+		store.Set(key, fetch(), -1)
+	})
 }
