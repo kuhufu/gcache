@@ -4,12 +4,12 @@
 ### 1. 应用内存缓存
 ```go
 cacheSize := 100 * 1024 * 1024 //100MB
-var cache = NewMemCache(cacheSize)
+cache := gcache.NewMemCache(cacheSize)
 ```
 
 ### 2. Redis缓存
 ```go
-var cache = NewRedisCache(10, "tcp", "127.0.0.1:6379", "password")
+var cache = gcache.NewRedisCache(10, "tcp", "127.0.0.1:6379", "password")
 ```
 
 ### 使用
@@ -46,6 +46,23 @@ if err != nil {
 var value interface{}
 err = json.Unmarshal(data, &value)
 return value, err
+```
+
+### 更新器
+```go
+cacheSize := 100 * 1024 * 1024 //100MB
+cache := gcache.NewMemCache(cacheSize)
+updater := gcache.NewUpdaterOf(cache)
+
+//每5s更新一次，true表示立刻更新一次
+updater.Interval("key", 5, func()[]byte{
+	//获取新值，返回新值
+}, true)
+
+//5s后更新一次，true同上
+updater.Timeout("key", 5, func()[]byte{
+	//获取新值，返回新值
+}, true)
 ```
 
 ### Benchmark
