@@ -10,5 +10,7 @@ github.com/kuhufu/flyredis v0.0.0-20190626081007-7acf0472d5e4 h1:Xmx9PWwW+5IA+wx
 github.com/kuhufu/flyredis v0.0.0-20190626081007-7acf0472d5e4/go.mod h1:7JBBE8dndAUbb8zq33LpkN2mNKTU8qOD0gpsbN5cQRo=
 github.com/kuhufu/scheduler v0.0.0-20190708151241-073d8923883e h1:xu9stLF09oUN/W34tp/5lUgrZHM5Sk6h771AXVgfX04=
 github.com/kuhufu/scheduler v0.0.0-20190708151241-073d8923883e/go.mod h1:xsPxym+16Wx/6azUR6nU3ea3JzvPCy1FHWyAADcRBxA=
+github.com/kuhufu/scheduler v0.0.0-20190708154552-1ac4e7766505 h1:kxMGRe5Bxi6dMsw405dE7Iuld6LeC7nym3fKxgPWvxo=
+github.com/kuhufu/scheduler v0.0.0-20190708154552-1ac4e7766505/go.mod h1:xsPxym+16Wx/6azUR6nU3ea3JzvPCy1FHWyAADcRBxA=
 github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72 h1:qLC7fQah7D6K1B0ujays3HV9gkFtllcxhzImRR7ArPQ=
 github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72/go.mod h1:JwIasOWyU6f++ZhiEuf87xNszmSA2myDM2Kzu9HwQUA=
