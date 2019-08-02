@@ -10,7 +10,7 @@ type CacheStore interface {
 	//expireSeconds <= 0 表示永不过期
 	Set(key string, val interface{}, expireSeconds int) error
 	Get(key string) (result Result)
-	Del(key string) (affected bool)
+	Del(key string) (err error)
 	GetUnmarshal(key string) (value interface{}, err error)
 }
 

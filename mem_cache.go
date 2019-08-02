@@ -31,8 +31,7 @@ func (c *memCache) Get(key string) Result {
 	return memResult{reply: data, err: nil}
 }
 
-func (c *memCache) Del(key string) (affected bool) {
-	_, affected = c.inner.Get(key)
+func (c *memCache) Del(key string) (err error) {
 	c.inner.Delete(key)
 	return
 }

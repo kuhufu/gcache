@@ -39,9 +39,8 @@ func (c *redisCache) Get(key string) (result Result) {
 	return c.inner.Do("GET", key)
 }
 
-func (c *redisCache) Del(key string) (affected bool) {
-	reply, _ := c.inner.Do("DEL", key).Int()
-	return reply != 0
+func (c *redisCache) Del(key string) (err error) {
+	return c.inner.Do("DEL", key).Error()
 }
 
 func (c *redisCache) GetUnmarshal(key string) (value interface{}, err error) {
