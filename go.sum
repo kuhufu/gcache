@@ -1,7 +1,7 @@
 github.com/gomodule/redigo v2.0.0+incompatible h1:K/R+8tc58AaqLkqG2Ol3Qk+DR/TlNuhuh457pBFPtt0=
 github.com/gomodule/redigo v2.0.0+incompatible/go.mod h1:B4C85qUVwatsJoIUNIfCRsp7qO0iAmpGFZ4EELWSbC4=
-github.com/kuhufu/flyredis v0.0.0-20190802025300-2574a4e3e18f h1:5CSnVDYv8vDm1/ocStU8rVaUpIDw4lPvcc24b2oAYwk=
-github.com/kuhufu/flyredis v0.0.0-20190802025300-2574a4e3e18f/go.mod h1:7JBBE8dndAUbb8zq33LpkN2mNKTU8qOD0gpsbN5cQRo=
+github.com/kuhufu/flyredis v0.0.0-20190802063720-6d7a5f202402 h1:7rhGdEn9SMgEF06rlDPfKSyTEsJJEoqH5EMw/VYEy3o=
+github.com/kuhufu/flyredis v0.0.0-20190802063720-6d7a5f202402/go.mod h1:7JBBE8dndAUbb8zq33LpkN2mNKTU8qOD0gpsbN5cQRo=
 github.com/kuhufu/scheduler v0.0.0-20190708154552-1ac4e7766505 h1:kxMGRe5Bxi6dMsw405dE7Iuld6LeC7nym3fKxgPWvxo=
 github.com/kuhufu/scheduler v0.0.0-20190708154552-1ac4e7766505/go.mod h1:xsPxym+16Wx/6azUR6nU3ea3JzvPCy1FHWyAADcRBxA=
 github.com/patrickmn/go-cache v2.1.0+incompatible h1:HRMgzkcYKYpi3C8ajMPV8OFXaaRUnok+kx1WdO15EQc=
