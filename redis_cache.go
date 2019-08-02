@@ -28,7 +28,7 @@ var _ CacheStore = (*redisCache)(nil)
 func (c *redisCache) Set(key string, val interface{}, expireSeconds int) error {
 	var err error
 	if expireSeconds <= 0 {
-		err = c.inner.SET(key, val).Error()
+		err = c.inner.Do("SET", key, val).Error()
 		return err
 	}
 	err = c.inner.Do("SET", key, val, "EX", expireSeconds).Error()

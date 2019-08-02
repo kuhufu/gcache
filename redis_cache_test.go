@@ -28,8 +28,8 @@ func TestRedisCache_Get(t *testing.T) {
 }
 
 func TestRedisCache_Del(t *testing.T) {
-	if !cacheStore.Del(redisKey) {
-		t.Fatal("not affected")
+	if err := cacheStore.Del(redisKey); err != nil {
+		t.Fatal(err)
 	}
 }
 

@@ -25,8 +25,8 @@ func TestMemCache_Get(t *testing.T) {
 }
 
 func TestMemCache_Del(t *testing.T) {
-	if !memc.Del(memKey) {
-		t.Fatal("not affected")
+	if err := memc.Del(memKey); err != nil {
+		t.Fatal(err)
 	}
 }
 
