@@ -10,7 +10,7 @@ type Updater struct {
 	store     CacheStore
 }
 
-func NewUpdaterOf(store CacheStore) *Updater {
+func NewUpdater(store CacheStore) *Updater {
 	return &Updater{
 		scheduler: scheduler.New(),
 		store:     store,

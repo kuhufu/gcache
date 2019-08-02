@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var s = NewUpdaterOf(memc)
+var s = NewUpdater(memc)
 
 func TestNewSchedulerOf(t *testing.T) {
 	s.Interval("k1", 1, func() interface{} {
