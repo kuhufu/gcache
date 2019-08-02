@@ -35,11 +35,13 @@ func NewMemCache() CacheStore {
 func NewRedisCache(network, address string, option RedisOption) CacheStore {
 	return &redisCache{
 		inner: flyredis.NewPool(network, address, flyredis.Option{
-			MaxIdle:     option.MaxIdle,
-			MaxActive:   option.MaxActive,
-			IdleTimeout: option.IdleTimeout,
-			Wait:        option.Wait,
-			Password:    option.Password,
+			MaxIdle:      option.MaxIdle,
+			MaxActive:    option.MaxActive,
+			IdleTimeout:  option.IdleTimeout,
+			Wait:         option.Wait,
+			Password:     option.Password,
+			TestOnBorrow: option.TestOnBorrow,
+			DialOptions:  option.DialOptions,
 		}),
 	}
 }
