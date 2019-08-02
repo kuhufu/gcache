@@ -26,21 +26,21 @@ func (u *Updater) Stop() {
 }
 
 //@param immediately 是否立刻执行一次fetch函数
-func (u *Updater) Interval(key string, seconds int, fetch func() []byte, immediately bool) {
+func (u *Updater) Interval(key string, seconds int, fetch func() interface{}, immediately bool) {
 	if immediately {
-		u.store.Set(key, fetch(), -1)
+		_ = u.store.Set(key, fetch(), -1)
 	}
 	u.scheduler.AddIntervalFunc(time.Duration(seconds)*time.Second, func() {
-		u.store.Set(key, fetch(), -1)
+		_ = u.store.Set(key, fetch(), -1)
 	})
 }
 
 //@param immediately 是否立刻执行一次fetch函数
-func (u *Updater) Timeout(key string, seconds int, fetch func() []byte, immediately bool) {
+func (u *Updater) Timeout(key string, seconds int, fetch func() interface{}, immediately bool) {
 	if immediately {
-		u.store.Set(key, fetch(), -1)
+		_ = u.store.Set(key, fetch(), -1)
 	}
 	u.scheduler.AddTimeoutFunc(time.Duration(seconds)*time.Second, func() {
-		u.store.Set(key, fetch(), -1)
+		_ = u.store.Set(key, fetch(), -1)
 	})
 }

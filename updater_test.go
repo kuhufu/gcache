@@ -6,39 +6,36 @@ import (
 	"time"
 )
 
-var s = NewUpdaterOf(cache)
+var s = NewUpdaterOf(memc)
 
 func TestNewSchedulerOf(t *testing.T) {
-	s.Interval("k1", 1, func() []byte {
-		return []byte(time.Now().String())
+	s.Interval("k1", 1, func() interface{} {
+		return time.Now().String()
 	}, true)
 
 	for {
-		fmt.Println(cache.Get("k1"))
+		fmt.Println(memc.Get("k1"))
 		time.Sleep(time.Second)
 	}
 }
 
 func TestScheduler_Interval(t *testing.T) {
-	s.Interval("k1", 1, func() []byte {
-		return []byte(time.Now().String())
+	s.Interval("k1", 1, func() interface{} {
+		return time.Now().String()
 	}, true)
 
 	for {
-		fmt.Println(cache.Get("k1"))
+		fmt.Println(memc.Get("k1"))
 		time.Sleep(time.Second)
 	}
 }
 
 func TestScheduler_Timeout(t *testing.T) {
 	s.Start()
-	s.Timeout("k1", 1, func() []byte {
-		return []byte(time.Now().String())
+	s.Timeout("k1", 1, func() interface{} {
+		return time.Now().String()
 	}, true)
-
-	var value, _ = cache.Get("k1")
-	fmt.Println(string(value))
-	time.Sleep(2 * time.Second)
-	value, _ = cache.Get("k1")
-	fmt.Println(string(value))
+	fmt.Println(memc.Get("k1").String())
+	time.Sleep(time.Second * 4)
+	fmt.Println(memc.Get("k1").String())
 }

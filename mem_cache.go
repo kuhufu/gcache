@@ -2,32 +2,45 @@ package gcache
 
 import (
 	"encoding/json"
-	"github.com/coocood/freecache"
+	"errors"
+	"github.com/patrickmn/go-cache"
+	"time"
 )
 
-// 应用内存缓存
 type memCache struct {
-	inner *freecache.Cache
+	inner *cache.Cache
 }
 
 var _ CacheStore = (*memCache)(nil)
 
-func (c *memCache) Set(key string, val []byte, expireSeconds int) error {
-	return c.inner.Set([]byte(key), val, expireSeconds)
+func (c *memCache) Set(key string, val interface{}, expireSeconds int) (err error) {
+	if expireSeconds <= 0 {
+		c.inner.Set(key, val, -1)
+	} else {
+		c.inner.Set(key, val, time.Duration(expireSeconds)*time.Second)
+	}
+	return
 }
 
-func (c *memCache) Get(key string) (value []byte, err error) {
-	return c.inner.Get([]byte(key))
+func (c *memCache) Get(key string) Result {
+	data, exist := c.inner.Get(key)
+	if !exist {
+		return memResult{reply: nil, err: errors.New(key + " not exist")}
+	}
+
+	return memResult{reply: data, err: nil}
 }
 
 func (c *memCache) Del(key string) (affected bool) {
-	return c.inner.Del([]byte(key))
+	_, affected = c.inner.Get(key)
+	c.inner.Delete(key)
+	return
 }
 
 func (c *memCache) GetUnmarshal(key string) (value interface{}, err error) {
-	data, err := c.inner.Get([]byte(key))
+	data, err := c.Get(key).Bytes()
 	if err != nil {
-		return nil, err
+		return
 	}
 	err = json.Unmarshal(data, &value)
 	return

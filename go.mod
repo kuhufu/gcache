@@ -3,9 +3,7 @@ module github.com/kuhufu/gcache
 go 1.12
 
 require (
-	github.com/cespare/xxhash v1.1.0 // indirect
-	github.com/coocood/freecache v1.1.0
-	github.com/gomodule/redigo v2.0.0+incompatible
-	github.com/kuhufu/flyredis v0.0.0-20190626081007-7acf0472d5e4
+	github.com/kuhufu/flyredis v0.0.0-20190802025300-2574a4e3e18f
 	github.com/kuhufu/scheduler v0.0.0-20190708154552-1ac4e7766505
+	github.com/patrickmn/go-cache v2.1.0+incompatible
 )
