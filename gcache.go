@@ -3,6 +3,7 @@ package gcache
 import (
 	"github.com/kuhufu/flyredis"
 	"github.com/patrickmn/go-cache"
+	"sync"
 	"time"
 )
 
@@ -11,6 +12,9 @@ type CacheStore interface {
 	Set(key string, val interface{}, expireSeconds int) error
 	Get(key string) (result Result)
 	Del(key string) (err error)
+	Incr(key string) (result Result)
+	IncrBy(key string, v int) (result Result)
+	Expire(key string, sec int) error
 	GetUnmarshal(key string) (value interface{}, err error)
 }
 
@@ -29,6 +33,7 @@ type Result interface {
 func NewMemCache() CacheStore {
 	return &memCache{
 		inner: cache.New(0, time.Second*60),
+		mu:    &sync.Mutex{},
 	}
 }
 

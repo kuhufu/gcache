@@ -3,6 +3,7 @@ package gcache
 import (
 	"fmt"
 	"testing"
+	"time"
 )
 
 var memc = NewMemCache()
@@ -28,6 +29,35 @@ func TestMemCache_Del(t *testing.T) {
 	if err := memc.Del(memKey); err != nil {
 		t.Fatal(err)
 	}
+}
+
+func TestMemCache_IncrBy(t *testing.T) {
+	memc.IncrBy("test", 1)
+	memc.IncrBy("test", 1)
+	reply, err := memc.Get("test").Int()
+	if err != nil {
+		t.Error(err)
+	}
+
+	if reply != 2 {
+		t.Error("error incr 1", reply)
+	}
+}
+
+func TestMemCache_Expire(t *testing.T) {
+	sec := 2
+	memc.Set("test", 3, sec)
+	if v, err := memc.Get("test").Int(); err != nil || v != 3 {
+		t.Error(err)
+	}
+
+	time.Sleep(time.Duration(sec) * time.Second)
+
+	if memc.Get("test").Error() == nil {
+		t.Error("expire failure")
+	}
+
+	fmt.Println(memc.Get("test").Error())
 }
 
 func BenchmarkMemCache_Get1KB(b *testing.B) {

@@ -12,6 +12,8 @@ type redisCache struct {
 	inner *flyredis.Pool
 }
 
+var _ CacheStore = (*redisCache)(nil)
+
 type RedisOption struct {
 	MaxIdle         int
 	MaxActive       int
@@ -23,7 +25,17 @@ type RedisOption struct {
 	DialOptions     []redis.DialOption
 }
 
-var _ CacheStore = (*redisCache)(nil)
+func (c *redisCache) Incr(key string) (result Result) {
+	return c.inner.Do("INCR", key)
+}
+
+func (c *redisCache) IncrBy(key string, v int) (result Result) {
+	return c.inner.Do("INCRBY", key, v)
+}
+
+func (c *redisCache) Expire(key string, sec int) error {
+	return c.inner.Do("EXPIRE", key, sec).Error()
+}
 
 func (c *redisCache) Set(key string, val interface{}, expireSeconds int) error {
 	var err error
