@@ -25,6 +25,10 @@ type RedisOption struct {
 	DialOptions     []redis.DialOption
 }
 
+func (c *redisCache) Exist(key string) (bool, error) {
+	return c.inner.Do("EXIST", key).Bool()
+}
+
 func (c *redisCache) Incr(key string) (result Result) {
 	return c.inner.Do("INCR", key)
 }

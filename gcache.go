@@ -12,6 +12,7 @@ type CacheStore interface {
 	Set(key string, val interface{}, expireSeconds int) error
 	Get(key string) (result Result)
 	Del(key string) (err error)
+	Exist(key string) (bool, error)
 	Incr(key string) (result Result)
 	IncrBy(key string, v int) (result Result)
 	Expire(key string, sec int) error

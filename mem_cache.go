@@ -14,7 +14,13 @@ type memCache struct {
 }
 
 var _ CacheStore = (*memCache)(nil)
+
 var ErrKeyNotExist = errors.New("key not exist")
+
+func (c *memCache) Exist(key string) (bool, error) {
+	_, exist := c.inner.Get(key)
+	return exist, nil
+}
 
 func (c *memCache) IncrBy(key string, v int) (result Result) {
 	c.mu.Lock()
