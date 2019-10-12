@@ -26,7 +26,7 @@ type RedisOption struct {
 }
 
 func (c *redisCache) Exist(key string) (bool, error) {
-	return c.inner.Do("EXIST", key).Bool()
+	return c.inner.Do("EXISTS", key).Bool()
 }
 
 func (c *redisCache) Incr(key string) (result Result) {
