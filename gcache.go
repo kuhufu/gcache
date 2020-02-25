@@ -14,7 +14,7 @@ type CacheStore interface {
 	Del(key string) (err error)
 	Exist(key string) (bool, error)
 	Incr(key string) (result Result)
-	IncrBy(key string, v int) (result Result)
+	IncrBy(key string, v int) (result Result) //返回新值
 	Expire(key string, sec int) error
 	GetUnmarshal(key string) (value interface{}, err error)
 }
